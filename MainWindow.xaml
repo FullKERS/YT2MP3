@@ -1,0 +1,94 @@
+﻿<Window x:Class="YT2MP3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YT2MP3"
+        mc:Ignorable="d"
+        Title="YT 2 MP3" Height="800" Width="1300"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="19*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Pierwsza kolumna z szarym tłem -->
+        <Border Grid.Column="0" Background="#FF232323">
+            <StackPanel Margin="0">
+                <!-- Logo -->
+                <Image Source="Resources/logo.png"  Height="70" />
+
+                <!-- Nazwa -->
+                <TextBlock Text="YouTube 2 MP3" FontWeight="Bold" FontSize="24" Margin="0 10 0 50" Foreground="White" FontFamily="Myriad Pro" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                <!-- Przyciski -->
+                <Button x:Name="btnAddLink" Margin="0 0" Padding="10 10" Click="btnAddLink_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Resources/ICONS/baseline_add_link_black_24dp.png" Width="48" Height="48"  Margin="0 0 20 0" />
+                        <TextBlock Text="Dodaj link" VerticalAlignment="Center" FontFamily="Myriad Pro" FontSize="16" />
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="0 0" Padding="10 10">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Resources/ICONS/baseline_folder_black_24dp.png" Width="48" Height="48"  Margin="0 0 20 0" />
+                        <TextBlock Text="Ustaw katalog" VerticalAlignment="Center" FontFamily="Myriad Pro" FontSize="16" />
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="0 0" Padding="10 10">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Resources/ICONS/baseline_terminal_black_24dp.png" Width="48" Height="48"  Margin="0 0 20 0" />
+                        <TextBlock Text="Pokaż log" VerticalAlignment="Center" FontFamily="Myriad Pro" FontSize="16" />
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="0 0" Padding="10 10">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Resources/ICONS/baseline_logout_black_24dp.png" Width="48" Height="48"  Margin="0 0 20 0" />
+                        <TextBlock Text="Zakończ" VerticalAlignment="Center" FontFamily="Myriad Pro" FontSize="16" />
+                    </StackPanel>
+                </Button>
+
+
+                <!-- Dodaj więcej przycisków jak potrzebujesz -->
+
+            </StackPanel>
+        </Border>
+
+        <!-- Druga kolumna -->
+        <Border Grid.Column="1" Margin="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Wiersz dla tekstu "Lista pobieranych plików" -->
+                    <RowDefinition Height="*"/>
+                    <!-- Wiersz dla tabeli (DataGrid) -->
+                </Grid.RowDefinitions>
+
+                <!-- Tekst "Lista pobieranych plików" -->
+                <TextBlock Grid.Row="0" Text="Lista pobieranych plików" FontWeight="Bold" FontSize="16" Margin="5"/>
+
+                <!-- Tabela (DataGrid) -->
+                <DataGrid Grid.Row="1" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Link" Width="*" Binding="{Binding Link}" />
+                        <DataGridTextColumn Header="Tytuł" Width="*" Binding="{Binding Tytul}" />
+                        <DataGridTextColumn Header="Format" Width="*" Binding="{Binding Format}" />
+                        <DataGridTextColumn Header="Długość" Width="*" Binding="{Binding Dlugosc}" />
+                        <DataGridTextColumn Header="Rozmiar" Width="*" Binding="{Binding Rozmiar}" />
+                        <DataGridTemplateColumn Header="Postęp pobierania">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ProgressBar Value="{Binding PostepPobierania}" Maximum="100"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Border>
+
+    </Grid>
+</Window>
